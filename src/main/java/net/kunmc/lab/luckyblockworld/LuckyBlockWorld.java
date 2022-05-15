@@ -1,6 +1,7 @@
 package net.kunmc.lab.luckyblockworld;
 
 import net.kunmc.lab.luckyblockworld.command.CommandRegister;
+import net.kunmc.lab.luckyblockworld.config.ServerConfig;
 import net.kunmc.lab.luckyblockworld.listener.TickListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -9,6 +10,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -41,6 +43,7 @@ public class LuckyBlockWorld {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(TickListener::onServerTick);
+        ServerConfig.register(ModLoadingContext.get());
     }
 
     @SubscribeEvent

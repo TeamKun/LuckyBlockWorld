@@ -50,7 +50,7 @@ public class BlockChange {
                 blockState.equals(Blocks.COBBLESTONE.getDefaultState()) ||
                 blockState.equals(Blocks.COBBLESTONE_STAIRS.getDefaultState()) ||
                 blockState.equals(Blocks.COBBLESTONE_SLAB.getDefaultState()) ||
-                blockState.equals(Blocks.STONE.getDefaultState()) ||
+                blockState.equals(Blocks.STONE_BRICKS.getDefaultState()) ||
                 blockState.equals(Blocks.CHEST.getDefaultState()) ||
                 blockState.equals(Blocks.ENDER_CHEST.getDefaultState()) ||
                 blockState.equals(Blocks.SLIME_BLOCK.getDefaultState()) ||

@@ -1,5 +1,6 @@
 package net.kunmc.lab.luckyblockworld.listener;
 
+import net.kunmc.lab.luckyblockworld.config.ServerConfig;
 import net.kunmc.lab.luckyblockworld.logic.BlockChange;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -20,7 +21,7 @@ public class TickListener {
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
 
-        if (cnt > 200) {
+        if (cnt > ServerConfig.instance.replaceTick.get()) {
             cnt = 0;
         } else {
             cnt++;
@@ -35,20 +36,25 @@ public class TickListener {
 
             World world = player.getServerWorld();
 
-            for (int dx = -5; dx <= 5; dx++) {
-                for (int dy = -5; dy <= 5; dy++) {
-                    for (int dz = -5; dz <= 5; dz++) {
+            int range = ServerConfig.instance.replaceRange.get();
+
+            for (int dx = -1 * range; dx <= range; dx++) {
+                for (int dy = -1 * range; dy <= range; dy++) {
+                    for (int dz = -1 * range; dz <= range; dz++) {
                         int x = playerPos.getX() + dx;
                         int y = playerPos.getY() + dy;
                         int z = playerPos.getZ() + dz;
-                        double dist = Math.sqrt((x * x + y * y + z * z));
-                        if (dist > 5.0) {
-                            BlockPos blockPos = new BlockPos(x, y, z);
-                            BlockState blockState = world.getBlockState(blockPos);
-                            if (!BlockChange.shouldChangeBlock(blockState)) continue;
-
-                            world.setBlockState(blockPos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation("lucky:lucky_block")).getDefaultState());
+                        double dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                        if (dist > range) {
+                            continue;
                         }
+
+                        BlockPos blockPos = new BlockPos(x, y, z);
+                        BlockState blockState = world.getBlockState(blockPos);
+                        if (!BlockChange.shouldChangeBlock(blockState)) continue;
+
+                        world.setBlockState(blockPos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation("lucky:lucky_block")).getDefaultState());
+
                     }
                 }
             }
