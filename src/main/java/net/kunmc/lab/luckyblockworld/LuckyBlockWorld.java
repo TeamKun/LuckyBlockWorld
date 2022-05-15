@@ -1,6 +1,7 @@
 package net.kunmc.lab.luckyblockworld;
 
 import net.kunmc.lab.luckyblockworld.command.CommandRegister;
+import net.kunmc.lab.luckyblockworld.listener.TickListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,6 +40,7 @@ public class LuckyBlockWorld {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(TickListener::onServerTick);
     }
 
     @SubscribeEvent
