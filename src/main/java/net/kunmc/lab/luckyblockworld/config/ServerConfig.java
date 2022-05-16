@@ -17,7 +17,7 @@ public class ServerConfig {
     public ServerConfig(ForgeConfigSpec.Builder builder) {
         // ForgeConfigSpec.Builderを利用してWrapperクラスのインスタンスを生成することが出来る
         this.replaceRange = builder.comment("Replace Block Range")
-                .defineInRange("replaceRange", 7, 1, 10);
+                .defineInRange("replaceRange", 6, 1, 10);
         this.replaceTick = builder.comment("Replace Block Time(Tick)")
                 .defineInRange("replaceTime", 10, 1, 20);
         this.gameStatus = builder.comment("Game Status(start/stop)")

@@ -56,7 +56,6 @@ public class TickListener {
                         if (!BlockChange.shouldChangeBlock(blockState)) continue;
 
                         world.setBlockState(blockPos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation("lucky:lucky_block")).getDefaultState());
-
                     }
                 }
             }

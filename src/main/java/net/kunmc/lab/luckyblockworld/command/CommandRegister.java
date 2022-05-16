@@ -13,7 +13,12 @@ import net.minecraft.util.text.StringTextComponent;
 public class CommandRegister {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         // ここに処理を追加していく
-        LiteralCommandNode<CommandSource> mainCommand = dispatcher.register(Commands.literal("lbw")
+        LiteralCommandNode<CommandSource> mainCommand = dispatcher.register(
+                Commands.literal("lbw")
+                        .executes(ctx -> {
+                            ctx.getSource().sendFeedback(new StringTextComponent(getUsage()), false);
+                            return Command.SINGLE_SUCCESS;
+                        })
                 .requires(cs -> cs.hasPermissionLevel(4)));
         mainCommand.addChild(SetRange.create());
         mainCommand.addChild(SetTick.create());
@@ -81,5 +86,20 @@ public class CommandRegister {
                     })
                     .build();
         }
+    }
+
+    private static String getUsage(){
+        String descPrefix = "    ";
+        String message = "Usage:\n";
+        message += "  lbw\n";
+        message += String.format("%s%s\n", descPrefix, "setRange");
+        message += String.format("%s%s\n", descPrefix, "  LuckyBlockへの変換範囲を指定(デフォルト 6)");
+        message += String.format("%s%s\n", descPrefix, "setTick");
+        message += String.format("%s%s\n", descPrefix, "  LuckyBlockへの変換Tick間隔を指定（デフォルト 10）");
+        message += String.format("%s%s\n", descPrefix, "start");
+        message += String.format("%s%s\n", descPrefix, "  開始");
+        message += String.format("%s%s\n", descPrefix, "stop");
+        message += String.format("%s%s", descPrefix, "  終了");
+        return message;
     }
 }

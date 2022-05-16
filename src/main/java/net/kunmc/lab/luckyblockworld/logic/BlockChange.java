@@ -14,7 +14,7 @@ public class BlockChange {
     public static boolean shouldChangeBlock(BlockState blockState) {
         // 変更しない対象
         if (blockState.equals(luckBlockState.getMaterial()) ||
-                blockState.equals(Blocks.AIR.getDefaultState()) ||
+                blockState.getMaterial().equals(Material.AIR) ||
                 blockState.getMaterial().equals(Material.WATER) ||
                 blockState.getMaterial().equals(Material.LAVA) ||
                 blockState.getMaterial().equals(Material.PORTAL) ||
