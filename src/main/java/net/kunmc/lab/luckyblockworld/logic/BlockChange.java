@@ -20,7 +20,7 @@ public class BlockChange {
                 blockState.getMaterial().equals(Material.PORTAL) ||
                 blockState.equals(Blocks.OBSIDIAN.getDefaultState()) ||
                 blockState.equals(Blocks.END_GATEWAY.getDefaultState()) ||
-                blockState.equals(Blocks.END_PORTAL_FRAME.getDefaultState()) ||
+                blockState.getBlock() == Blocks.END_PORTAL_FRAME ||
                 blockState.equals(Blocks.TNT.getDefaultState()) ||
                 blockState.getMaterial().equals(Material.ANVIL) ||
                 blockState.equals(Blocks.BLACK_GLAZED_TERRACOTTA.getDefaultState()) ||
@@ -44,11 +44,10 @@ public class BlockChange {
                 blockState.equals(Blocks.LAPIS_BLOCK.getDefaultState()) ||
                 blockState.equals(Blocks.EMERALD_BLOCK.getDefaultState()) ||
                 blockState.getBlock() instanceof FenceBlock ||
-                blockState.equals(Blocks.OAK_FENCE.getDefaultState()) ||
                 blockState.equals(Blocks.SANDSTONE.getDefaultState()) ||
-                blockState.equals(Blocks.SANDSTONE_STAIRS.getDefaultState()) ||
+                blockState.getBlock() == Blocks.SANDSTONE_STAIRS ||
                 blockState.equals(Blocks.COBBLESTONE.getDefaultState()) ||
-                blockState.equals(Blocks.COBBLESTONE_STAIRS.getDefaultState()) ||
+                blockState.getBlock() == Blocks.COBBLESTONE_STAIRS ||
                 blockState.equals(Blocks.COBBLESTONE_SLAB.getDefaultState()) ||
                 blockState.equals(Blocks.STONE_BRICKS.getDefaultState()) ||
                 blockState.equals(Blocks.CHEST.getDefaultState()) ||
@@ -65,8 +64,8 @@ public class BlockChange {
                 blockState.equals(Blocks.REDSTONE_TORCH.getDefaultState()) ||
                 blockState.equals(Blocks.REDSTONE_WIRE.getDefaultState()) ||
                 blockState.equals(Blocks.REDSTONE_WALL_TORCH.getDefaultState()) ||
-                blockState.equals(Blocks.TORCH.getDefaultState()) ||
-                blockState.equals(Blocks.LEVER.getDefaultState()) ||
+                blockState.getBlock() == Blocks.TORCH ||
+                blockState.getBlock() == Blocks.LEVER ||
                 blockState.getMaterial().equals(Material.IRON) ||
                 blockState.equals(Blocks.YELLOW_TERRACOTTA.getDefaultState()) ||
                 blockState.equals(Blocks.CRAFTING_TABLE.getDefaultState())
