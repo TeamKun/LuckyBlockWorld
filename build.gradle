@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 group = 'net.kunmc.lab'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 java {
     archivesBaseName = 'LuckyBlockWorld'
