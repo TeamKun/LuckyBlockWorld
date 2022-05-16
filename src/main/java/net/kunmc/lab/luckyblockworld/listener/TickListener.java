@@ -19,7 +19,7 @@ public class TickListener {
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
+        if (event.phase != TickEvent.Phase.END || !ServerConfig.instance.gameStatus.get()) return;
 
         if (cnt > ServerConfig.instance.replaceTick.get()) {
             cnt = 0;
@@ -32,14 +32,16 @@ public class TickListener {
         PlayerList playerList = ServerLifecycleHooks.getCurrentServer().getPlayerList();
         for (String playerName : onlinePlayers) {
             ServerPlayerEntity player = playerList.getPlayerByUsername(playerName);
+            if (player.isCreative() || player.isSpectator()) continue;
             BlockPos playerPos = player.getPosition();
 
             World world = player.getServerWorld();
 
             int range = ServerConfig.instance.replaceRange.get();
+            int yRange = Math.min(6, range);
 
             for (int dx = -1 * range; dx <= range; dx++) {
-                for (int dy = -1 * range; dy <= range; dy++) {
+                for (int dy = -1 * yRange; dy <= yRange; dy++) {
                     for (int dz = -1 * range; dz <= range; dz++) {
                         int x = playerPos.getX() + dx;
                         int y = playerPos.getY() + dy;

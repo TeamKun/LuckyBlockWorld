@@ -12,6 +12,7 @@ public class ServerConfig {
     // tomlファイルにシリアライズするためにはWrapperクラスを使わなければならない.
     public final ForgeConfigSpec.ConfigValue<Integer> replaceRange;
     public final ForgeConfigSpec.ConfigValue<Integer> replaceTick;
+    public final ForgeConfigSpec.ConfigValue<Boolean> gameStatus;
 
     public ServerConfig(ForgeConfigSpec.Builder builder) {
         // ForgeConfigSpec.Builderを利用してWrapperクラスのインスタンスを生成することが出来る
@@ -19,6 +20,8 @@ public class ServerConfig {
                 .defineInRange("replaceRange", 7, 1, 10);
         this.replaceTick = builder.comment("Replace Block Time(Tick)")
                 .defineInRange("replaceTime", 10, 1, 20);
+        this.gameStatus = builder.comment("Game Status(start/stop)")
+                .define("gameStatus", false);
     }
 
     // staticイニシャライザ内で直接登録しようとしても上手く出来ないためModのメインクラスのコンストラクタからこの関数を呼び登録する.

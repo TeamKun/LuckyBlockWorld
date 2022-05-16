@@ -17,6 +17,8 @@ public class CommandRegister {
                 .requires(cs -> cs.hasPermissionLevel(4)));
         mainCommand.addChild(SetRange.create());
         mainCommand.addChild(SetTick.create());
+        mainCommand.addChild(Start.create());
+        mainCommand.addChild(Stop.create());
     }
 
     private static class SetRange {
@@ -43,6 +45,40 @@ public class CommandRegister {
                                 ctx.getSource().sendFeedback(new StringTextComponent("setTickの値を" + num + "に変更しました"), false);
                                 return Command.SINGLE_SUCCESS;
                             }))
+                    .build();
+        }
+    }
+
+    private static class Start {
+        public static CommandNode<CommandSource> create() {
+            return Commands.literal("start")
+                    .executes(ctx -> {
+                        if (ServerConfig.instance.gameStatus.get()) {
+                            ctx.getSource().sendFeedback(new StringTextComponent("すでに開始しています"), false);
+                            return 0;
+                        }
+
+                        ServerConfig.instance.gameStatus.set(true);
+                        ctx.getSource().sendFeedback(new StringTextComponent("startしました"), false);
+                        return Command.SINGLE_SUCCESS;
+                    })
+                    .build();
+        }
+    }
+
+    private static class Stop {
+        public static CommandNode<CommandSource> create() {
+            return Commands.literal("stop")
+                    .executes(ctx -> {
+                        if (!ServerConfig.instance.gameStatus.get()) {
+                            ctx.getSource().sendFeedback(new StringTextComponent("開始されていません"), false);
+                            return 0;
+                        }
+
+                        ServerConfig.instance.gameStatus.set(false);
+                        ctx.getSource().sendFeedback(new StringTextComponent("stopしました"), false);
+                        return Command.SINGLE_SUCCESS;
+                    })
                     .build();
         }
     }
